@@ -47,6 +47,7 @@ public class GaussEliminationUsingPivoting extends GaussElimination {
 			}
 		}
 		mat.swap(bigRaw, k);
+		// print
 		System.out.println("swap rows: "+bigRaw+", "+k);
 		mat.print(mat.matrix());	
 	}
