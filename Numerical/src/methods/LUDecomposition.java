@@ -211,5 +211,17 @@ public class LUDecomposition {
             for (j = 0; j < A.length; j++) 
                 B[i][j] = A[j][i];
     }
+	
+// Testing of both forms 
+	
+public static void main(String[] args) {
+        double mat[][] = { { 4, 12, -16 },
+				{ 12, 37, -43 },
+				{ -16, -43, 98 } };
+        double m[] = {6, 7, 15};
+	
+	LUDoolittle(mat, m, 3);
+        LUCholesky(mat, m, 3);
+    }
   
 }
