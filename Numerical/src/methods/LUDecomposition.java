@@ -81,7 +81,76 @@ public class LUDecomposition {
 		    System.out.println();
 	    }
   
-  // Method 2 ( Cholesky LU Decomposition )
+	// Method  (Crout LU Method
+	
+	public static void LUCrout(double mat [][], double [] b, int n) {
+		int i, j, k;
+		double sum = 0;
+        	double[][] lower = new double[n][n];
+        	double[][] upper = new double[n][n];
+        
+		for (i = 0; i < n; i++) {
+			upper[i][i] = 1;
+		}
+
+		for (j = 0; j < n; j++) {
+			for (i = j; i < n; i++) {
+				sum = 0;
+				for (k = 0; k < j; k++) {
+					sum = sum + lower[i][k] * upper[k][j];	
+				}
+				lower[i][j] = mat[i][j] - sum;
+			}
+
+			for (i = j; i < n; i++) {
+				sum = 0;
+				for(k = 0; k < j; k++) {
+					sum = sum + lower[j][k] * upper[k][i];
+				}
+				if (lower[j][j] == 0) {
+					System.out.println("det(L) close to 0!\n Can't divide by 0...\n");
+					return ;
+				}
+				upper[j][i] = (mat[j][i] - sum) / lower[j][j];
+			}
+		}
+		
+        System.out.println("Lower Triangular");
+	       
+        // Displaying the result :
+        // Lower
+        
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                System.out.print(lower[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        
+        System.out.println("Upper Triangular");	        
+        
+        // Displaying the result :
+        // Upper
+
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                System.out.print(upper[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        
+        double ff[] = forward (lower, b);
+	    double bb[]= backward (upper, ff);
+	    System.out.println("Solution");	 
+	       
+	    for (double element: bb) {
+	    	System.out.println(element);
+	    }
+	    System.out.println();
+        
+	}
+	
+  // Method 3 ( Cholesky LU Decomposition )
   
   static void LUCholesky(double[][] matrix, double [] b, int n) {
     	if (isSymmetric(matrix)) {
@@ -215,13 +284,14 @@ public class LUDecomposition {
 // Testing of both forms 
 	
 public static void main(String[] args) {
-        double mat[][] = { { 4, 12, -16 },
-				{ 12, 37, -43 },
-				{ -16, -43, 98 } };
-        double m[] = {6, 7, 15};
-	
-	LUDoolittle(mat, m, 3);
-        LUCholesky(mat, m, 3);
+        int n = 3;
+	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
+        double b[] = {6, 7, 15};
+
+	LUDoolittle(mat, b, n);
+        LUCholesky(mat, b, n);
+	LUCrout(mat, b, n);
+
     }
   
 }
