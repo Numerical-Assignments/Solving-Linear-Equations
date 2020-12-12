@@ -1,5 +1,8 @@
 package testing;
 
+import methods.GaussElimination;
+import methods.GaussEliminationUsingPivoting;
+import methods.GaussJordan;
 import methods.GaussSeidil;
 import methods.JacobiIteration;
 
@@ -8,19 +11,17 @@ public class mainIsHere{
 	public static void main(String[] args) {
 		//System.out.println("Hello World!");
 		double [][]matrix = {{1,2},{6,5}};
-		double []b = {3,4};
+		double []bc = {3,4};
 		GaussSeidil gs = new GaussSeidil();
-		double[] s = gs.gaussSeidil(matrix, b,1e-15, 7);
+		double[] s = gs.gaussSeidil(matrix, bc,1e-15, 7);
 		for (int i =0 ; i< s.length;i++) {
 			System.out.println(s[i]);
 		}
 		JacobiIteration j = new JacobiIteration();
-		double[] ss = j.jacobi(matrix, b,1e-15, 7);
+		double[] ss = j.jacobi(matrix, bc,1e-15, 7);
 		for (int i =0 ; i< ss.length;i++) {
 			System.out.println(ss[i]);
 		}
-=======
-		//AX=B
 		double[][] a = new double[][] {
 			{2,1,4},
 			{1,2,3},
@@ -38,7 +39,9 @@ public class mainIsHere{
 		
 		GaussJordan jordan = new GaussJordan();
 		jordan.solve(a.clone(), b.clone());
->>>>>>> branch 'main' of https://github.com/Numerical-Assignments/Assignment1.git
+
+		
+
 
 	}
 

@@ -16,7 +16,7 @@ public class GaussSeidil {
 		 double [] bb = new double[n];
 			for (int i = 0; i < rows.length; i++) { 
 				for (int j = 0; j < n ; j++) {
-						D[i][j] = matrix.getMatrix()[rows[i]][j];}
+						D[i][j] = matrix.matrix()[rows[i]][j];}
 				bb[i] = b[rows[i]];
 			}
 		matrix.setMatrix(D);
@@ -25,7 +25,7 @@ public class GaussSeidil {
 	
 	 
 	 public boolean check (boolean[] visited,  int[] rows) {
-		 double[][] M =  matrix.getMatrix();
+		 double[][] M =  matrix.matrix();
 		 int row = 0;
 		 boolean big = false;
 		 for (int i = 0; i < n ; i++) { 
@@ -60,11 +60,11 @@ public class GaussSeidil {
 	 
 	 public double[] gaussSeidil (double[][] mat , double[] bb, double error, int itreations) {
 		 matrix.setMatrix(mat);
-		 n=matrix.getMatrix().length;
+		 n=matrix.matrix().length;
 		 b = bb;
 		 
 		 if(makeDominant()) {
-			 double [][] M = matrix.getMatrix();
+			 double [][] M = matrix.matrix();
 			 double[] X = new double[n]; // Approximations 
 		     double[] P = new double[n]; // Prev 
 		     Arrays.fill(X, 0);
