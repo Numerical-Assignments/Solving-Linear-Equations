@@ -1,9 +1,19 @@
 package matrices;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class matrixMaker {
 	private double matrix[][];
 	
 	public matrixMaker() {}
+	
+	public double setpercision(double temp, int percision) {
+		Double truncatedDouble = BigDecimal.valueOf(temp)
+			    .setScale(percision, RoundingMode.HALF_UP)
+			    .doubleValue();
+		return truncatedDouble;
+	}
 	
 	public matrixMaker(double[][] newMatrix) {
 		this.matrix = newMatrix;

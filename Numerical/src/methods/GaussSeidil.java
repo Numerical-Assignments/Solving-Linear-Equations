@@ -10,7 +10,7 @@ public class GaussSeidil {
 	 matrixMaker matrix = new matrixMaker();
 	 int n ;//= matrix.getMatrix().length;
 	 double[] b;// = new double [n];
-	 
+	 public StringBuilder steps = new StringBuilder();
 	 public void transformToDominant (int[] rows) {
 		 double[][] D = new double[n][n]; 
 		 double [] bb = new double[n];
@@ -58,37 +58,137 @@ public class GaussSeidil {
 	        return check(visited, rows); 
 	    } 
 	 
-	 public double[] gaussSeidil (double[][] mat , double[] bb, double error, int itreations) {
+	 public double[] gaussSeidilwitherror (double[][] mat , double[] bb, double error,double[] intial,int percision) {
 		 matrix.setMatrix(mat);
 		 n=matrix.matrix().length;
 		 b = bb;
-		 
+		 for(int i = 0 ; i < n ; i++) {
+			 for (int j = 0 ; j < n ; j++) {
+				 matrix.matrix()[i][j]=matrix.setpercision(matrix.matrix()[i][j], percision);
+				 steps.append("("+matrix.matrix()[i][j]+")");
+				 steps.append("X"+ (j+1) +" ");
+				 if(j != n-1)  steps.append("+ ");
+	            	//else steps.append("\n");
+			 }
+			 b[i] = matrix.setpercision(b[i], percision);
+			 steps.append("= "+ b [i] +"\n");
+		 }
+		 steps.append("-----------------------------------"+"\n");
 		 if(makeDominant()) {
+			 steps.append("After making equations diagonally dominant :"+"\n");
 			 double [][] M = matrix.matrix();
+			 for(int i = 0 ; i < n ; i++) {
+				 for (int j = 0 ; j < n ; j++) {
+					 steps.append("("+matrix.matrix()[i][j]+")");
+					 steps.append("X"+ (j+1) +" ");
+					 if(j != n-1)  steps.append("+ ");
+				 }
+				 steps.append("= "+ b [i] +"\n");
+			 }
+			 steps.append("-----------------------------------"+"\n");
 			 double[] X = new double[n]; // Approximations 
 		     double[] P = new double[n]; // Prev 
-		     Arrays.fill(X, 0);
-		    for(int itreation = 0 ;itreation < itreations ; itreation++){ 
+		     X = intial;
+		     int itreation = 0;
+		    while(true) {
 		            for (int i = 0; i < n; i++) { 
 		                double sum = b[i]; // b_n 
-		                for (int j = 0; j < n; j++) 
+		                for (int j = 0; j < n; j++) {
 		                    if (j != i) 
-		                        sum -= M[i][j] * X[j]; 
+		                        sum -= M[i][j] * X[j];
+		               sum = matrix.setpercision(sum,percision);}
 		                // Update xi to use in the next 
 		                // row calculation 
-		                X[i] = sum / M[i][i] ; 
+		                X[i] = sum / M[i][i] ;
+		                X[i] = matrix.setpercision(X[i], percision);
 		            } 
-		            
+		            steps.append("Itreation"+(itreation+1)+":  ");
+		            itreation++;
+		            for (int k = 0 ; k < n ; k++) {
+		            	steps.append("X"+(k+1)+" = "+X[k]+" ");
+		            	if(k != n-1)  steps.append(", ");
+		            	else steps.append("\n");
+		            }
 		            if (itreation == 0) 
 		                continue; 
 		            boolean stop = true; 
 		            for (int i = 0; i < n && stop; i++) 
-		                if (Math.abs(X[i] - P[i]) > error) 
+		                if (Math.abs(X[i] - P[i]) > error) { 
 		                    stop = false; 
+		                    }
 		            if (stop) 
 		                break; 
 		            P = (double[])X.clone(); 
 		        }
+		    steps.append("-----------------------------------"+"\n");
+		    steps.append("The solution : "  );
+            for (int k = 0 ; k < n ; k++) {
+            	steps.append("X"+(k+1)+" = "+X[k]+" ");
+            	if(k != n-1)  steps.append(", ");
+            	else steps.append("\n");
+            }
+		    return X ;
+		 }
+		return null;
+		 
+	 }
+	 
+	 public double[] gaussSeidilwithItrations (double[][] mat , double[] bb, int itreations,double[] intial,int percision ) {
+		 matrix.setMatrix(mat);
+		 n=matrix.matrix().length;
+		 b = bb;
+		 for(int i = 0 ; i < n ; i++) {
+			 for (int j = 0 ; j < n ; j++) {
+				 matrix.matrix()[i][j]=matrix.setpercision(matrix.matrix()[i][j], percision);
+				 steps.append("("+matrix.matrix()[i][j]+")");
+				 steps.append("X"+ (j+1) +" ");
+				 if(j != n-1)  steps.append("+ ");
+	            	//else steps.append("\n");
+			 }
+			 b[i] = matrix.setpercision(b[i], percision);
+			 steps.append("= "+ b [i] +"\n");
+		 }
+		 steps.append("-----------------------------------"+"\n");
+		 if(makeDominant()) {
+			 steps.append("After making equations diagonally dominant :"+"\n");
+			 double [][] M = matrix.matrix();
+			 for(int i = 0 ; i < n ; i++) {
+				 for (int j = 0 ; j < n ; j++) {
+					 steps.append("("+matrix.matrix()[i][j]+")");
+					 steps.append("X"+ (j+1) +" ");
+					 if(j != n-1)  steps.append("+ ");
+				 }
+				 steps.append("= "+ b [i] +"\n");
+			 }
+			 steps.append("-----------------------------------"+"\n");
+			 double[] X = new double[n]; // Approximations 
+		     X = intial;
+		    for(int itreation = 0 ;itreation < itreations ; itreation++){ 
+		            for (int i = 0; i < n; i++) { 
+		                double sum = b[i]; // b_n 
+		                for (int j = 0; j < n; j++) {
+		                    if (j != i) 
+		                        sum -= M[i][j] * X[j];
+		                sum = matrix.setpercision(sum,percision);}
+		                // Update xi to use in the next 
+		                // row calculation 
+		                X[i] = sum / M[i][i] ;
+		                X[i] = matrix.setpercision(X[i], percision);
+		            } 
+		            steps.append("Itreation"+(itreation+1)+":  ");
+		            for (int k = 0 ; k < n ; k++) {
+		            	steps.append("X"+(k+1)+" = "+X[k]+" ");
+		            	if(k != n-1)  steps.append(", ");
+		            	else steps.append("\n");
+		            }
+		        }
+		    steps.append("-----------------------------------"+"\n");
+		    steps.append("The solution : "  );
+            for (int k = 0 ; k < n ; k++) {
+            	steps.append("X"+(k+1)+" = "+X[k]+" ");
+            	if(k != n-1)  steps.append(", ");
+            	else steps.append("\n");
+            }
 		    return X ;
 		 }
 		return null;
