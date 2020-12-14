@@ -2,13 +2,15 @@ package methods;
 import java.math.BigDecimal;
 import java.math.RoundingMode; 
 public class LUDecomposition {
-	    static String LUDoolittle(double[][] mat, double [] b, int n, int p) {
+	    static String[] LUDoolittle(double[][] mat, double [] b, int n, int p) {
 	    	
 	        double[][] lower = new double[n][n];
 	        double[][] upper = new double[n][n];
 	        
 	   	 	StringBuilder steps = new StringBuilder();
-	 
+	   	 	StringBuilder output = new StringBuilder();
+	   	 	String [] Solution = new String [2];
+	   	 	
 	        // Decomposing matrix into Upper and Lower
 	        // triangular matrix
 	        for (int i = 0; i < n; i++)
@@ -84,25 +86,29 @@ public class LUDecomposition {
 	        double ff[] = forward (lower, b, p);
 		    double bb[]= backward (upper, ff, p);
 	        
-		    steps.append("Solution" + "\n");
+		    output.append("Solution" + "\n");
 		    //System.out.println("Solution");	 
 		       
 		    for (double element: bb) {
-			    steps.append(element + "\n");
+			    output.append(element + "\n");
 		    	//System.out.println(element);
 		    }
 	        steps.append("\n");
 		    //System.out.println();
-		    return steps.toString();
-	    }  
+	        Solution[0] = steps.toString();
+	        Solution[1] = output.toString();
+		    return Solution;
+		    }
 	// Method  (Crout LU Method
 	
-	public static String LUCrout(double mat [][], double [] b, int n, int p) {
+	public static String[] LUCrout(double mat [][], double [] b, int n, int p) {
 		int i, j, k;
 		double sum = 0;
         double[][] lower = new double[n][n];
         double[][] upper = new double[n][n];
    	 	StringBuilder steps = new StringBuilder();
+   	 	StringBuilder output = new StringBuilder();
+   	 	String [] Solution = new String [2];
 
 		for (i = 0; i < n; i++) {
 			upper[i][i] = 1;
@@ -130,7 +136,8 @@ public class LUDecomposition {
 					//System.out.println("det(L) close to 0!\n Can't divide by 0...\n");
 					
 					steps.append("det(L) close to 0!\n Can't divide by 0...\n");
-					return steps.toString();
+			        Solution[1] = output.toString();
+				    return Solution;
 				}
 				upper[j][i] = (setpercision(mat[j][i],p) - sum) / setpercision(lower[j][j],p);
 				upper[j][i] = setpercision(upper[j][i], p);
@@ -167,25 +174,27 @@ public class LUDecomposition {
         }        
         double ff[] = forward (lower, b, p);
 	    double bb[]= backward (upper, ff, p);
-	    steps.append("Solution" + "\n");
+	    output.append("Solution" + "\n");
 	    //System.out.println("Solution");	 
 	       
 	    for (double element: bb) {
-		    steps.append(element + "\n");
+		    output.append(element + "\n");
 	    	//System.out.println(element);
 	    }
-        steps.append("\n");
+        output.append("\n");
 	    //System.out.println();
-	    return steps.toString();
+        Solution[0] = steps.toString();
+        Solution[1] = output.toString();
+	    return Solution;
         
-	}
-
-	
+	}	
   // Method 3 ( Cholesky LU Decomposition )
   
-	static String LUCholesky(double[][] matrix, double [] b, int n, int p) {
+	static String[] LUCholesky(double[][] matrix, double [] b, int n, int p) {
     	
    	 	StringBuilder steps = new StringBuilder();
+   	 	StringBuilder output = new StringBuilder();
+   	 	String [] Solution = new String [2];
 
 		if (isSymmetric(matrix)) {
     		double[][] lower = new double[n][n];
@@ -252,27 +261,31 @@ public class LUDecomposition {
             
             double ff[] = forward (lower, b, p);
     	    double bb[]= backward (lowerTranspose, ff, p);
-		    steps.append("Solution" + "\n");
+		    output.append("Solution" + "\n");
 		    //System.out.println("Solution");	 
 		       
 		    for (double element: bb) {
-			    steps.append(element + "\n");
+			    output.append(element + "\n");
 		    	//System.out.println(element);
 		    }
-	        steps.append("\n");
+	        output.append("\n");
 		    //System.out.println();
-		    return steps.toString();
+	        Solution[0] = steps.toString();
+	        Solution[1] = output.toString();
+		    return Solution;
     	}
     	
     	else {
-    	    System.out.println("Not Symmetric Matrix :)");
+    	    //System.out.println("Not Symmetric Matrix :)");
     	    steps.append("Not Symmetric Matrix :)"+"\n");
-		    return steps.toString();
+    	    output.append("Not Symmetric Matrix :)"+"\n");
+	        Solution[1] = output.toString();
+		    return Solution;
     	    
     	}
 		
-    }  
-  	// To Check matrix is symmetric or not for cholesky decomposition
+    }
+	// To Check matrix is symmetric or not for cholesky decomposition
   
   	static boolean isSymmetric(double mat[][]) 
 	{ 
@@ -346,14 +359,21 @@ public class LUDecomposition {
 	
 public static void main(String[] args) {
         int n = 3;
+<<<<<<< HEAD
 	int precision = 4;
+=======
+	int precision = 2;
+>>>>>>> branch 'main' of https://github.com/Numerical-Assignments/Assignment1.git
 	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
         double b[] = {6, 7, 15};
 
-	//LUDoolittle(mat, b, n);
-	System.out.println(LUDoolittle(mat, b, n, precision));
-        System.out.println(LUCholesky(mat, b, n, precision));
-        System.out.println(LUCrout(mat, b, n, precision));
+	
+	System.out.println(LUDoolittle(mat, m, n, precision)[0]);
+        System.out.println(LUDoolittle(mat, m, n, precision)[1]);
+        System.out.println(LUCrout(mat,m, n, precision)[0]);
+        System.out.println(LUCrout(mat,m, n, precision)[1]);
+        System.out.println(LUCholesky(mat, m, n, precision)[0]);
+        System.out.println(LUCholesky(mat, m, n, precision)[1]);
 
     }
   
