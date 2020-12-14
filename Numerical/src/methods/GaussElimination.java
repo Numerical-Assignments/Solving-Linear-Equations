@@ -4,8 +4,8 @@ import matrices.*;
 
 public class GaussElimination {
 	
-	private HelpTools tool = new HelpTools();
 	private boolean solutionExist = true;
+	protected HelpTools tool = new HelpTools();
 	protected StringBuilder steps = new StringBuilder(); 
 	
 	public double[] solve(double[][] a, double[] b) {
@@ -44,7 +44,7 @@ public class GaussElimination {
 		}
 		if(mat.matrix()[mat.matrix().length-1][mat.matrix().length-1] == 0) {
 			solutionExist = false;
-			System.out.println("no solution, row is full of zeros!");
+			throw new RuntimeException("no solution, row is full of zeros!");
 		}
 	}
 	
@@ -77,11 +77,11 @@ public class GaussElimination {
 				break;
 			}
 		}
-		if(!solutionExist) System.out.println("no solution, column is full of zeroes!");
+		if(!solutionExist) throw new RuntimeException("no solution, column is full of zeroes!");
 		else {
 			//print
-			System.out.println("swap rows: "+i+", "+k);
-			mat.print(mat.matrix());
+			steps.append("swap rows: "+i+", "+k+"\n");
+			tool.AppendMatrixToString(steps ,mat.matrix());
 		}
 	}
 	
