@@ -352,7 +352,7 @@ public static void main(String[] args) {
 	//LUDoolittle(mat, b, n);
 	System.out.println(LUDoolittle(mat, b, n, precision));
         System.out.println(LUCholesky(mat, b, n, precision));
-        System.out.println(LUCrout(mat,m, b, precision));
+        System.out.println(LUCrout(mat, b, n, precision));
 
     }
   
