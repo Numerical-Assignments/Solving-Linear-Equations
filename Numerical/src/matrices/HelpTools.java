@@ -1,5 +1,9 @@
 package matrices;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -31,5 +35,21 @@ public class HelpTools {
 			    .doubleValue();
 		return truncatedDouble;
 	}
+	
+	public String readFromFile(String path) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(path));
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = null;
+		String ls = System.getProperty("line.separator");
+		while ((line = reader.readLine()) != null) {
+			stringBuilder.append(line);
+			stringBuilder.append(ls);
+		}
+		// delete the last new line separator
+		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		reader.close();
+		return stringBuilder.toString();
+	}
+	
 
 }
