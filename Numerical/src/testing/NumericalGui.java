@@ -108,8 +108,8 @@ public class NumericalGui {
 					lblInitialGuess.setVisible(true);
 					initialScrollPane.setVisible(true);
 					ParametersComboBox.setModel(new DefaultComboBoxModel(
-							new String[] { "Choose Paremeter?", "Number of iterations", "Absolute Relative Error" }));
-					lblParameters.setText("Parameters:");
+							new String[] { "Stop Condition?", "Number of iterations", "Absolute Relative Error" }));
+					lblParameters.setText("Condition:");
 					lblParameters.setVisible(true);
 					ParametersComboBox.setVisible(true);
 					break;
@@ -119,7 +119,7 @@ public class NumericalGui {
 					initialScrollPane.setVisible(true);
 					ParametersComboBox.setModel(new DefaultComboBoxModel(
 							new String[] { "Choose Paremeter?", "Number of iterations", "Absolute Relative Error" }));
-					lblParameters.setText("Parameters:");
+					lblParameters.setText("Condition:");
 					lblParameters.setVisible(true);
 					ParametersComboBox.setVisible(true);
 					break;
@@ -136,7 +136,7 @@ public class NumericalGui {
 		ParametersComboBox = new JComboBox();
 		ParametersComboBox.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
 		ParametersComboBox.setBounds(132, 396, 191, 20);
-		ParametersComboBox.setModel(new DefaultComboBoxModel(new String[] { "Choose Paremeter?" }));
+		//ParametersComboBox.setModel(new DefaultComboBoxModel(new String[] { "Choose Paremeter?" }));
 		ParametersComboBox.setVisible(false);
 		frame.getContentPane().add(ParametersComboBox);
 		ParametersComboBox.addActionListener(new ActionListener() {

@@ -8,8 +8,8 @@ public class matrixMaker {
 	
 	public matrixMaker() {}
 	
-	public double setpercision(double temp, int percision) {
-		Double truncatedDouble = BigDecimal.valueOf(temp)
+	public double setpercision(double Number, int percision) {
+		Double truncatedDouble = BigDecimal.valueOf(Number)
 			    .setScale(percision, RoundingMode.HALF_UP)
 			    .doubleValue();
 		return truncatedDouble;
