@@ -36,6 +36,7 @@ public class GaussJordan {
 		}
 		for (int i=0;i<matrix.matrix().length;i++) {
 			solution[i]=matrix.matrix()[i][matrix.matrix()[0].length-1]/matrix.matrix()[i][i];
+			solution[i]=help.setpercision(solution[i], percision);
 		}
 		steps.append("\nGauss Jordan method Solution => ");
 		steps=help.AppendVectorToString(steps, solution);
