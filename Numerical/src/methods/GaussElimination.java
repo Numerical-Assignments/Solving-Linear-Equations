@@ -1,9 +1,10 @@
 package methods;
 
-import matrices.matrixMaker;
+import matrices.*;
 
 public class GaussElimination {
 	
+	private HelpTools tool = new HelpTools();
 	private boolean solutionExist = true;
 	protected StringBuilder steps = new StringBuilder(); 
 	
@@ -12,7 +13,7 @@ public class GaussElimination {
 		matrixMaker mat = new matrixMaker(a,b);
 		//print
 		steps.append("appendix matrix: \n");
-		printToBuilder(mat.matrix());
+		tool.AppendMatrixToString(steps ,mat.matrix());
 		
 		forwardElimination(mat);
 		if(solutionExist)
@@ -26,8 +27,6 @@ public class GaussElimination {
 		steps.append("Forward elimination: \n");
 		
 		for(int k=0; k<mat.matrix().length-1; k++) {
-			//print
-			steps.append("step: "+(k+1)+"\n");
 			for(int i=k+1; i<mat.matrix().length; i++) {
 				// factor handling
 				if(mat.matrix()[k][k] == 0) swap(mat, k);
@@ -40,7 +39,7 @@ public class GaussElimination {
 					mat.matrix()[i][j] = mat.matrix()[i][j] - factor*mat.matrix()[k][j];
 				}
 				//print
-				printToBuilder(mat.matrix());
+				tool.AppendMatrixToString(steps ,mat.matrix());
 			}
 		}
 		if(mat.matrix()[mat.matrix().length-1][mat.matrix().length-1] == 0) {
@@ -64,7 +63,7 @@ public class GaussElimination {
 			x[i] = (mat.matrix()[i][l] - sum) / mat.matrix()[i][i];
 		}
 		//print
-		printToBuilder(x);
+		tool.AppendVectorToString(steps ,x);
 		return x;
 	}
 	
