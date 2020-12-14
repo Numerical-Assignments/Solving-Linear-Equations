@@ -58,5 +58,15 @@ public class HelpTools {
 		return stringBuilder.toString();
 	}
 	
+	public double[] handleIntialGuess(String input ) {
+		String[] arrOfStr = input.split(",");
+		double[] back = new double[arrOfStr.length];
+		for(int i = 0 ; i < back.length ; i++) {
+			back[i] = Double.parseDouble(arrOfStr[i]);
+		}
+		return back;
+		
+	}
+	
 
 }

@@ -359,21 +359,17 @@ public class LUDecomposition {
 	
 public static void main(String[] args) {
         int n = 3;
-<<<<<<< HEAD
 	int precision = 4;
-=======
-	int precision = 2;
->>>>>>> branch 'main' of https://github.com/Numerical-Assignments/Assignment1.git
 	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
         double b[] = {6, 7, 15};
 
 	
-	System.out.println(LUDoolittle(mat, m, n, precision)[0]);
-        System.out.println(LUDoolittle(mat, m, n, precision)[1]);
-        System.out.println(LUCrout(mat,m, n, precision)[0]);
-        System.out.println(LUCrout(mat,m, n, precision)[1]);
-        System.out.println(LUCholesky(mat, m, n, precision)[0]);
-        System.out.println(LUCholesky(mat, m, n, precision)[1]);
+	System.out.println(LUDoolittle(mat, b, n, precision)[0]);
+        System.out.println(LUDoolittle(mat, b, n, precision)[1]);
+        System.out.println(LUCrout(mat,b, n, precision)[0]);
+        System.out.println(LUCrout(mat,b, n, precision)[1]);
+        System.out.println(LUCholesky(mat, b, n, precision)[0]);
+        System.out.println(LUCholesky(mat, b, n, precision)[1]);
 
     }
   

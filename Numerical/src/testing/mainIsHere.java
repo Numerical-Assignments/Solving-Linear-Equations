@@ -1,5 +1,6 @@
 package testing;
 
+import matrices.HelpTools;
 import methods.GaussElimination;
 import methods.GaussEliminationUsingPivoting;
 import methods.GaussJordan;
@@ -10,6 +11,12 @@ public class mainIsHere{
 
 	public static void main(String[] args) {
 		//System.out.println("Hello World!");
+		HelpTools h = new HelpTools();
+		double[] rr = (h.handleIntialGuess("1,2"));
+		for(int i = 0 ; i < rr.length ; i++) {
+			System.out.println(rr[i]);
+		}
+		
 		double [][]matrix = {{1,2},{6,5}};
 		double []bc = {3,4};
 		double []z = {0,0};
