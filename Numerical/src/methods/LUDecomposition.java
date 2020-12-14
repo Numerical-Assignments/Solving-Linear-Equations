@@ -1,5 +1,6 @@
 package methods;
-
+import java.math.BigDecimal;
+import java.math.RoundingMode; 
 public class LUDecomposition {
 	    static String LUDoolittle(double[][] mat, double [] b, int n, int p) {
 	    	
@@ -352,7 +353,7 @@ public static void main(String[] args) {
 	//LUDoolittle(mat, b, n);
 	System.out.println(LUDoolittle(mat, b, n, precision));
         System.out.println(LUCholesky(mat, b, n, precision));
-        System.out.println(LUCrout(mat,m, b, precision));
+        System.out.println(LUCrout(mat, b, n, precision));
 
     }
   
