@@ -230,29 +230,33 @@ public class NumericalGui {
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "LU Decomposition.":
+						String[] S;
 						LUDecomposition lu = new LUDecomposition();
 						switch (parameter) {
 						case "Downlittle Form":
-							
+							//S=lu.LUDoolittle(mat, b, n, p);
 							break;
 						case "Crout Form":
-							
+							//S=lu.LUCrout(mat, b, n, p)
 							break;
 						case "Cholesky Form":
-							
+							//S=lu.LUCholesky(matrix, b, n, p)
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required Form");
 						}
+						stepsTextArea.setText(S[0]);
+						outputTextArea.setText(S[1]);
 						break;
 					case "Gauss Seidil." :
 						GaussSeidil gs = new GaussSeidil();
 						switch (parameter) {
 						case "Number of iterations": 
 							
+							//solution = gs.gaussSeidilwithItrations(mat, bb, itreations, intial, percision)
 							break;
 						case "Absolute Relative Error":
-							
+							//solution=gs.gaussSeidilwitherror(mat, bb, error, intial, percision)
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
@@ -264,10 +268,10 @@ public class NumericalGui {
 						JacobiIteration j = new JacobiIteration();
 						switch (parameter) {
 						case "Number of iterations": 
-							
+							//solution = j.jacobiwithItrations(mat, bb, itreations, intial, percision)
 							break;
 						case "Absolute Relative Error":
-							
+							//solution = j.jacobiwitherror(mat, bb, error, intial, percision)
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");

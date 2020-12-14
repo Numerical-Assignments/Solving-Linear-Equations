@@ -2,7 +2,7 @@ package methods;
 import java.math.BigDecimal;
 import java.math.RoundingMode; 
 public class LUDecomposition {
-	    static String[] LUDoolittle(double[][] mat, double [] b, int n, int p) {
+	   public static String[] LUDoolittle(double[][] mat, double [] b, int n, int p) {
 	    	
 	        double[][] lower = new double[n][n];
 	        double[][] upper = new double[n][n];
@@ -190,7 +190,7 @@ public class LUDecomposition {
 	}	
   // Method 3 ( Cholesky LU Decomposition )
   
-	static String[] LUCholesky(double[][] matrix, double [] b, int n, int p) {
+	public static String[] LUCholesky(double[][] matrix, double [] b, int n, int p) {
     	
    	 	StringBuilder steps = new StringBuilder();
    	 	StringBuilder output = new StringBuilder();
@@ -359,11 +359,7 @@ public class LUDecomposition {
 	
 public static void main(String[] args) {
         int n = 3;
-<<<<<<< HEAD
-	int precision = 4;
-=======
 	int precision = 2;
->>>>>>> branch 'main' of https://github.com/Numerical-Assignments/Assignment1.git
 	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
         double b[] = {6, 7, 15};
 
