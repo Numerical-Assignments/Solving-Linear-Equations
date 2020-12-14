@@ -346,7 +346,7 @@ public class LUDecomposition {
 	
 public static void main(String[] args) {
         int n = 3;
-	int precision;
+	int precision = 4;
 	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
         double b[] = {6, 7, 15};
 

@@ -1,7 +1,6 @@
 package matrices;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -34,6 +33,14 @@ public class HelpTools {
 			    .setScale(percision, RoundingMode.HALF_UP)
 			    .doubleValue();
 		return truncatedDouble;
+	}
+	
+	public String SolutionToString(double[] solution) {
+		StringBuilder str = new StringBuilder();
+		for (int i =0;i<solution.length;i++) {
+			str.append("X"+(i+1)+": "+solution[i]+"\t");
+		}
+		return str.toString();
 	}
 	
 	public String readFromFile(String path) throws IOException {

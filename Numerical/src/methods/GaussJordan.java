@@ -5,7 +5,7 @@ import matrices.matrixMaker;
 
 public class GaussJordan {
 	private StringBuilder steps;
-	HelpTools help = new HelpTools();
+	private HelpTools help = new HelpTools();
 
 	public double[] solve(double[][] a, double[] b, int percision) {
 		steps = new StringBuilder();
@@ -56,15 +56,15 @@ public class GaussJordan {
 			}
 		}
 		if (i==matrix.matrix().length) {
-			System.out.println("Cannot Swap");
-			//throw error
+			//System.out.println("Cannot Swap");
+			throw new ArithmeticException("Cannot Swap Rows");
 		}
 	}
 
-	public StringBuilder getSteps() {
-		return steps;
+	
+	public String getSteps() {
+		return steps.toString();
 	}
 	
-
 
 }

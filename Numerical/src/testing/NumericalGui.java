@@ -4,25 +4,40 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.management.RuntimeErrorException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JLabel;
-import javax.swing.JScrollBar;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import matrices.HelpTools;
+import methods.GaussElimination;
+import methods.GaussEliminationUsingPivoting;
+import methods.GaussJordan;
+import methods.GaussSeidil;
+import methods.JacobiIteration;
+import methods.LUDecomposition;
 
 public class NumericalGui {
 
+	private HelpTools help = new HelpTools();
+	
+	
+	private String method;
+	private String parameter;
+	
 	private JFrame frame;
 	private JScrollPane equationScrollPane;
 	private JLabel lblParameter;
@@ -31,6 +46,11 @@ public class NumericalGui {
 	private JScrollPane initialScrollPane;
 	private JComboBox ParametersComboBox;
 	private JLabel lblParameters;
+	private JTextArea equationTextArea;
+	private JTextArea stepsTextArea;
+	private JTextArea outputTextArea;
+	private JTextArea initialTextArea;
+	private JTextArea parameterTextArea;
 
 	/**
 	 * Launch the application.
@@ -78,7 +98,7 @@ public class NumericalGui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String method = MethodsComboBox.getSelectedItem().toString();
+				method = MethodsComboBox.getSelectedItem().toString();
 				switch (method) {
 				/*case "Gauss Elimination.":
 					equationScrollPane.setBounds(10, 87, 452, 250);
@@ -103,7 +123,7 @@ public class NumericalGui {
 					lblParameters.setVisible(true);
 					ParametersComboBox.setVisible(true);
 					break;
-				case "Gauss Seidil.":
+				case "Gauss Seidil." :
 					equationScrollPane.setBounds(10, 87, 452, 160);
 					lblInitialGuess.setVisible(true);
 					initialScrollPane.setVisible(true);
@@ -127,6 +147,7 @@ public class NumericalGui {
 					equationScrollPane.setBounds(10, 87, 452, 250);
 					ParametersComboBox.setVisible(false);
 					lblParameters.setVisible(false);
+					parameter = "";
 				}
 				// System.out.println(MethodsComboBox.getSelectedItem().toString());
 
@@ -143,8 +164,8 @@ public class NumericalGui {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String parameters = ParametersComboBox.getSelectedItem().toString();
-				switch (parameters) {
+				parameter = ParametersComboBox.getSelectedItem().toString();
+				switch (parameter) {
 				case "Number of iterations":
 					lblParameter.setText("# Iterations:");
 					parameterScrollPane.setVisible(true);
@@ -164,11 +185,106 @@ public class NumericalGui {
 		});
 
 		JButton btnLoadFile = new JButton("Load File");
+		btnLoadFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser fc = new JFileChooser(new File("c:\\temp"));
+				fc.setDialogTitle("Load a file");
+				fc.setFileFilter(new FileNameExtensionFilter("TextFile","txt"));
+				int returnValue =fc.showOpenDialog(null);
+				if (returnValue==JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fc.getSelectedFile();
+					try {
+						equationTextArea.setText(help.readFromFile(selectedFile.getAbsolutePath()));
+					} catch (IOException e) {
+						JOptionPane.showConfirmDialog(null, e.getMessage());
+					}
+				}
+			}
+		});
 		btnLoadFile.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
 		btnLoadFile.setBounds(10, 11, 109, 23);
 		frame.getContentPane().add(btnLoadFile);
 
 		JButton btnOk = new JButton("Ok");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					double[] solution;
+					switch (method) {
+					case "Gauss Elimination.":
+						GaussElimination g = new GaussElimination();
+						//the code here
+						stepsTextArea.setText(g.steps());
+						outputTextArea.setText(help.SolutionToString(solution));
+						break;
+					case "Gauss Elimination using pivoting.":
+						GaussEliminationUsingPivoting gp = new GaussEliminationUsingPivoting();
+						//the code here
+						stepsTextArea.setText(gp.steps());
+						outputTextArea.setText(help.SolutionToString(solution));
+						break;
+					case "Gauss Jordan.":
+						GaussJordan gj = new GaussJordan();
+						//the code here
+						stepsTextArea.setText(gj.getSteps());
+						outputTextArea.setText(help.SolutionToString(solution));
+						break;
+					case "LU Decomposition.":
+						LUDecomposition lu = new LUDecomposition();
+						switch (parameter) {
+						case "Downlittle Form":
+							
+							break;
+						case "Crout Form":
+							
+							break;
+						case "Cholesky Form":
+							
+							break;
+						default:
+							throw new RuntimeErrorException(null, "Please Choose the Required Form");
+						}
+						break;
+					case "Gauss Seidil." :
+						GaussSeidil gs = new GaussSeidil();
+						switch (parameter) {
+						case "Number of iterations": 
+							
+							break;
+						case "Absolute Relative Error":
+							
+							break;
+						default:
+							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
+						}
+						stepsTextArea.setText(gs.steps.toString());
+						outputTextArea.setText(help.SolutionToString(solution));
+						break;
+					case "Jacobi Iteration":
+						JacobiIteration j = new JacobiIteration();
+						switch (parameter) {
+						case "Number of iterations": 
+							
+							break;
+						case "Absolute Relative Error":
+							
+							break;
+						default:
+							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
+						}
+						stepsTextArea.setText(j.steps.toString());
+						outputTextArea.setText(help.SolutionToString(solution));
+						break;
+					default:
+						
+					}
+				
+				} catch (Exception e) {
+					//e.printStackTrace();//pop up 
+					JOptionPane.showConfirmDialog(null, e.getMessage());
+				}
+			}
+		});
 		btnOk.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
 		btnOk.setBounds(373, 343, 89, 73);
 		frame.getContentPane().add(btnOk);
@@ -177,7 +293,7 @@ public class NumericalGui {
 		equationScrollPane.setBounds(10, 87, 452, 250);// 250=>160
 		frame.getContentPane().add(equationScrollPane);
 
-		JTextArea equationTextArea = new JTextArea();
+		equationTextArea = new JTextArea();
 		equationTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		equationScrollPane.setViewportView(equationTextArea);
 
@@ -185,7 +301,7 @@ public class NumericalGui {
 		stepsScrollPane.setBounds(472, 87, 402, 329);
 		frame.getContentPane().add(stepsScrollPane);
 
-		JTextArea stepsTextArea = new JTextArea();
+		stepsTextArea = new JTextArea();
 		stepsTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		stepsTextArea.setEditable(false);
 		stepsScrollPane.setViewportView(stepsTextArea);
@@ -239,7 +355,7 @@ public class NumericalGui {
 		outputScrollPane.setBounds(10, 463, 864, 73);
 		frame.getContentPane().add(outputScrollPane);
 
-		JTextArea outputTextArea = new JTextArea();
+		outputTextArea = new JTextArea();
 		outputTextArea.setFont(new Font("Monotype Corsiva", Font.BOLD | Font.ITALIC, 28));
 		outputTextArea.setEditable(false);
 		outputScrollPane.setViewportView(outputTextArea);
@@ -260,7 +376,7 @@ public class NumericalGui {
 		initialScrollPane.setVisible(false);
 		frame.getContentPane().add(initialScrollPane);
 
-		JTextArea initialTextArea = new JTextArea();
+		initialTextArea = new JTextArea();
 		initialTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		// textArea_3.setVisible(false);
 		initialScrollPane.setViewportView(initialTextArea);
@@ -270,7 +386,7 @@ public class NumericalGui {
 		parameterScrollPane.setVisible(false);
 		frame.getContentPane().add(parameterScrollPane);
 
-		JTextArea parameterTextArea = new JTextArea();
+		parameterTextArea = new JTextArea();
 		parameterTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		// textArea_4.setVisible(false);
 		parameterScrollPane.setViewportView(parameterTextArea);
