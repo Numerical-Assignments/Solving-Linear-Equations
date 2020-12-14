@@ -9,11 +9,9 @@ public class GaussEliminationUsingPivoting extends GaussElimination {
 	@Override
 	protected void forwardElimination(matrixMaker mat) {
 		//print
-		mat.print(mat.matrix());
+		steps.append("Forward elimination: \n");
 		
 		for(int k=0; k<mat.matrix().length-1; k++) {
-			//print
-			System.out.println("k: "+k);
 			for(int i=k+1; i<mat.matrix().length; i++) {
 				//partial pivoting
 				partialPivoting(mat, k);
@@ -23,17 +21,17 @@ public class GaussEliminationUsingPivoting extends GaussElimination {
 				double factor = mat.matrix()[i][k] / mat.matrix()[k][k];
 				if(factor == 0) continue;
 				//print
-				System.out.println("factor: "+factor);
+				steps.append("factor: "+factor+"\n");
 				for(int j=k; j<mat.matrix()[0].length; j++) {
 					mat.matrix()[i][j] = mat.matrix()[i][j] - factor*mat.matrix()[k][j];
 				}
 				//print
-				mat.print(mat.matrix());
+				tool.AppendMatrixToString(steps ,mat.matrix());
 			}
 		}
 		if(mat.matrix()[mat.matrix().length-1][mat.matrix().length-1] == 0) {
 			solutionExist = false;
-			System.out.println("no solution, row is full of zeros!");
+			throw new RuntimeException("no solution, row is full of zeros!");
 		}
 	}
 	
@@ -48,7 +46,7 @@ public class GaussEliminationUsingPivoting extends GaussElimination {
 		}
 		mat.swap(bigRaw, k);
 		// print
-		System.out.println("swap rows: "+bigRaw+", "+k);
-		mat.print(mat.matrix());	
+		steps.append("swap rows: "+bigRaw+", "+k);
+		tool.AppendMatrixToString(steps ,mat.matrix());	
 	}
 }
