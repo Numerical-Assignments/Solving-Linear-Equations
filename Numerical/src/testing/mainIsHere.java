@@ -45,13 +45,15 @@ public class mainIsHere{
 		GaussElimination gaussSolver = new GaussElimination();
 		gaussSolver.solve(a.clone(), b.clone());
 		
+		System.out.print(gaussSolver.steps());
+		
 		System.out.println("\n\n");
 		
-		GaussEliminationUsingPivoting geup = new GaussEliminationUsingPivoting();
+		/*GaussEliminationUsingPivoting geup = new GaussEliminationUsingPivoting();
 		geup.solve(a.clone(), b.clone());
 		
 		GaussJordan jordan = new GaussJordan();
-		jordan.solve(a.clone(), b.clone(),4);
+		jordan.solve(a.clone(), b.clone(),4);*/
 
 		
 
