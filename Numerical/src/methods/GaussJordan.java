@@ -11,7 +11,7 @@ public class GaussJordan {
 		steps = new StringBuilder();
 		//create augmented matrix
 		matrixMaker matrix = new matrixMaker(a,b);
-		steps.append("Augmented Matrix: \n");
+		steps.append("Augmented Matrix: \t\t Percision: "+percision+"\n");
 		steps=help.AppendMatrixToString(steps, matrix.matrix());
 		return JordanElemenation(matrix,percision);
 	}
@@ -23,6 +23,7 @@ public class GaussJordan {
 			for (int i = 0;i<matrix.matrix().length;i++) {
 				if (i!=k) {
 					double factor = matrix.matrix()[i][k] / matrix.matrix()[k][k];
+					factor = help.setpercision(factor, percision);
 					if (factor ==0)continue;
 					steps.append("Factor: "+factor+"\t==> Base Row: "+(k+1)+", Secondary Row: "+(i+1)+" .\n");
 					for(int j=k; j<matrix.matrix()[0].length; j++) {
