@@ -26,7 +26,8 @@ public class GaussJordan {
 					factor = help.setpercision(factor, percision);
 					if (factor ==0)continue;
 					steps.append("Factor: "+factor+"\t==> Base Row: "+(k+1)+", Secondary Row: "+(i+1)+" .\n");
-					for(int j=k; j<matrix.matrix()[0].length; j++) {
+					matrix.matrix()[i][k]=0;
+					for(int j=k+1; j<matrix.matrix()[0].length; j++) {
 						matrix.matrix()[i][j] = matrix.matrix()[i][j] - factor*matrix.matrix()[k][j];
 						matrix.matrix()[i][j]=help.setpercision(matrix.matrix()[i][j], percision);
 					}
