@@ -20,6 +20,9 @@ public class mainIsHere{
 		
 		GaussEliminationUsingPivoting geup = new GaussEliminationUsingPivoting();
 		geup.solve(a.clone(), b.clone());
+		
+		GaussJordan jordan = new GaussJordan();
+		jordan.solve(a.clone(), b.clone());
 
 	}
 
