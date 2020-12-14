@@ -51,7 +51,7 @@ public class mainIsHere{
 		geup.solve(a.clone(), b.clone());
 		
 		GaussJordan jordan = new GaussJordan();
-		jordan.solve(a.clone(), b.clone());
+		jordan.solve(a.clone(), b.clone(),4);
 
 		
 
