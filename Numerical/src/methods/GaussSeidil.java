@@ -2,11 +2,11 @@ package methods;
 
 import java.util.Arrays;
 
-
+import matrices.HelpTools;
 import matrices.matrixMaker;
 
 public class GaussSeidil {
-
+	HelpTools help = new HelpTools();
 	 matrixMaker matrix = new matrixMaker();
 	 int n ;//= matrix.getMatrix().length;
 	 double[] b;// = new double [n];
@@ -64,13 +64,13 @@ public class GaussSeidil {
 		 b = bb;
 		 for(int i = 0 ; i < n ; i++) {
 			 for (int j = 0 ; j < n ; j++) {
-				 matrix.matrix()[i][j]=matrix.setpercision(matrix.matrix()[i][j], percision);
+				 matrix.matrix()[i][j]=help.setpercision(matrix.matrix()[i][j], percision);
 				 steps.append("("+matrix.matrix()[i][j]+")");
 				 steps.append("X"+ (j+1) +" ");
 				 if(j != n-1)  steps.append("+ ");
 	            	//else steps.append("\n");
 			 }
-			 b[i] = matrix.setpercision(b[i], percision);
+			 b[i] = help.setpercision(b[i], percision);
 			 steps.append("= "+ b [i] +"\n");
 		 }
 		 steps.append("-----------------------------------"+"\n");
@@ -96,11 +96,11 @@ public class GaussSeidil {
 		                for (int j = 0; j < n; j++) {
 		                    if (j != i) 
 		                        sum -= M[i][j] * X[j];
-		               sum = matrix.setpercision(sum,percision);}
+		               sum = help.setpercision(sum,percision);}
 		                // Update xi to use in the next 
 		                // row calculation 
 		                X[i] = sum / M[i][i] ;
-		                X[i] = matrix.setpercision(X[i], percision);
+		                X[i] = help.setpercision(X[i], percision);
 		            } 
 		            steps.append("Itreation"+(itreation+1)+":  ");
 		            itreation++;
@@ -140,13 +140,13 @@ public class GaussSeidil {
 		 b = bb;
 		 for(int i = 0 ; i < n ; i++) {
 			 for (int j = 0 ; j < n ; j++) {
-				 matrix.matrix()[i][j]=matrix.setpercision(matrix.matrix()[i][j], percision);
+				 matrix.matrix()[i][j]=help.setpercision(matrix.matrix()[i][j], percision);
 				 steps.append("("+matrix.matrix()[i][j]+")");
 				 steps.append("X"+ (j+1) +" ");
 				 if(j != n-1)  steps.append("+ ");
 	            	//else steps.append("\n");
 			 }
-			 b[i] = matrix.setpercision(b[i], percision);
+			 b[i] = help.setpercision(b[i], percision);
 			 steps.append("= "+ b [i] +"\n");
 		 }
 		 steps.append("-----------------------------------"+"\n");
