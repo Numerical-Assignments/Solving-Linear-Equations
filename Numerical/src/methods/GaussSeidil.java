@@ -128,12 +128,13 @@ public class GaussSeidil {
             	else steps.append("\n");
             }
 		    return X ;
+		 }else {
+			 throw new RuntimeException("The system isn't diagonally dominant .\n The method cannot guarantee convergence.");
 		 }
-		return null;
 		 
 	 }
 	 
-	 public double[] gaussSeidilwithItrations (double[][] mat , double[] bb, int itreations,double[] intial,int percision ) {
+	 public double[] gaussSeidilwithItrations (double[][] mat , double[] bb, int itreations,double[] intial,int percision )  {
 		 matrix.setMatrix(mat);
 		 n=matrix.matrix().length;
 		 b = bb;
@@ -190,8 +191,9 @@ public class GaussSeidil {
             	else steps.append("\n");
             }
 		    return X ;
+		 }else {
+			 throw new RuntimeException("The system isn't diagonally dominant .\n The method cannot guarantee convergence.");
 		 }
-		return null;
 		 
 	 }
 	

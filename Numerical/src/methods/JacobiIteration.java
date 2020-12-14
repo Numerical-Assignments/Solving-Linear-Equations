@@ -128,9 +128,10 @@ public class JacobiIteration {
             	else steps.append("\n");
             }
 		    return X ;
+		 }else {
+			 throw new RuntimeException("The system isn't diagonally dominant .\n The method cannot guarantee convergence.");
 		 }
-		return null;
-		 
+		
 	 }
 	 
 	 public double[] jacobiwithItrations (double[][] mat , double[] bb, int itreations,double[] intial,int percision ) {
@@ -192,9 +193,9 @@ public class JacobiIteration {
             	else steps.append("\n");
             }
 		    return X ;
+		 }else {
+			 throw new RuntimeException("The system isn't diagonally dominant .\n The method cannot guarantee convergence.");
 		 }
-		return null;
-		 
 	 }
 	
 	}
