@@ -298,6 +298,8 @@ public class NumericalGui {
 				} catch (Exception e) {
 					//JOptionPane.showConfirmDialog(null, e.getMessage());
 					JOptionPane.showMessageDialog(null, e.getMessage());
+					stepsTextArea.setText("");
+					outputTextArea.setText("");
 				}
 			}
 		});
