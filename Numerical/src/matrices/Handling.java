@@ -40,13 +40,14 @@ public class Handling {
 			return false;
 		}
 	}
-	static int numOfLines (String input) {
+	
+	public static int numOfLines (String input) {
 		String[] lines = input.split("\r\n|\r|\n");
 		return lines.length;
 	}
 	
 	
-	static String recievedInitialGuess (String input, int p, int n, double b[]) {
+	public static String recievedInitialGuess (String input, int p, int n, double b[]) {
    	 	StringBuilder observedErrors = new StringBuilder();
    	 	
 		String[] arrOfStr = input.split("[,]");
@@ -76,7 +77,7 @@ public class Handling {
 		
 	}
 	
-	static ArrayList<Double> recievedText (String input, int p) {
+	public static ArrayList<Double> recievedText (String input, int p) {
    	 	
     	String[] arrOfStr = input.split("[\n,]"); 
     	ArrayList<Double> aList = new ArrayList<>();
@@ -95,7 +96,7 @@ public class Handling {
     	return aList;
 	}
 	
-	static String handeledMatrix (String input, ArrayList<Double> list, int n, double[][] mat, double b[]) {
+	public static String handeledMatrix (String input, ArrayList<Double> list, int n, double[][] mat, double b[]) {
 		
 		StringBuilder observedErrors = new StringBuilder();
 		double indexOfMatrixB = n;

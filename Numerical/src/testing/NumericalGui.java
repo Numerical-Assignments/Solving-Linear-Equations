@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import matrices.Handling;
 import matrices.HelpTools;
 import methods.GaussElimination;
 import methods.GaussEliminationUsingPivoting;
@@ -197,7 +199,7 @@ public class NumericalGui {
 					try {
 						equationTextArea.setText(help.readFromFile(selectedFile.getAbsolutePath()));
 					} catch (IOException e) {
-						JOptionPane.showConfirmDialog(null, e.getMessage());
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 				}
 			}
@@ -211,37 +213,43 @@ public class NumericalGui {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					double[] solution;
+					String equation = equationTextArea.getText();
+					int sizeOfArray = Handling.numOfLines(equation);
+					double A[][] = new double [sizeOfArray][sizeOfArray];   
+			        double B[] = new double [sizeOfArray];		        
+					int percision = (int) spinner.getValue();
+					Handling.handeledMatrix(equation, Handling.recievedText (equation, percision),sizeOfArray, A, B);
+					//errorInitial = recievedInitialGuess (initial, precision, sizeOfArray, I);
 					switch (method) {
 					case "Gauss Elimination.":
 						GaussElimination g = new GaussElimination();
-						//the code here
+						solution= g.solve(A, B);
 						stepsTextArea.setText(g.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Gauss Elimination using pivoting.":
 						GaussEliminationUsingPivoting gp = new GaussEliminationUsingPivoting();
-						//the code here
+						solution= gp.solve(A, B);
 						stepsTextArea.setText(gp.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Gauss Jordan.":
 						GaussJordan gj = new GaussJordan();
-						//the code here
+						solution= gj.solve(A, B,percision);
 						stepsTextArea.setText(gj.getSteps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "LU Decomposition.":
-						String[] S;
-						LUDecomposition lu = new LUDecomposition();
+						String[] S = null;
 						switch (parameter) {
 						case "Downlittle Form":
-							//S=lu.LUDoolittle(mat, b, n, p);
+							S=LUDecomposition.LUDoolittle(A, B,sizeOfArray,percision);
 							break;
 						case "Crout Form":
-							//S=lu.LUCrout(mat, b, n, p)
+							S=LUDecomposition.LUCrout(A, B,sizeOfArray,percision);
 							break;
 						case "Cholesky Form":
-							//S=lu.LUCholesky(matrix, b, n, p)
+							S=LUDecomposition.LUCholesky(A, B,sizeOfArray,percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required Form");
@@ -251,13 +259,14 @@ public class NumericalGui {
 						break;
 					case "Gauss Seidil." :
 						GaussSeidil gs = new GaussSeidil();
+						double [] initial = null;
+						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial);
 						switch (parameter) {
 						case "Number of iterations": 
-							
-							//solution = gs.gaussSeidilwithItrations(mat, bb, itreations, intial, percision)
+							solution = gs.gaussSeidilwithItrations(A,B, Integer.parseInt(parameterTextArea.getText()), initial, percision);
 							break;
 						case "Absolute Relative Error":
-							//solution=gs.gaussSeidilwitherror(mat, bb, error, intial, percision)
+							solution=gs.gaussSeidilwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
@@ -266,13 +275,15 @@ public class NumericalGui {
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Jacobi Iteration":
+						initial = null;
+						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial);
 						JacobiIteration j = new JacobiIteration();
 						switch (parameter) {
 						case "Number of iterations": 
-							//solution = j.jacobiwithItrations(mat, bb, itreations, intial, percision)
+							solution = j.jacobiwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()), initial, percision);
 							break;
 						case "Absolute Relative Error":
-							//solution = j.jacobiwitherror(mat, bb, error, intial, percision)
+							solution = j.jacobiwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
@@ -285,7 +296,8 @@ public class NumericalGui {
 					}
 				
 				} catch (Exception e) {
-					JOptionPane.showConfirmDialog(null, e.getMessage());
+					//JOptionPane.showConfirmDialog(null, e.getMessage());
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			}
 		});
