@@ -5,10 +5,14 @@ import matrices.matrixMaker;
 public class GaussElimination {
 	
 	private boolean solutionExist = true;
+	protected StringBuilder steps = new StringBuilder(); 
 	
 	public double[] solve(double[][] a, double[] b) {
 		//create appendix matrix
 		matrixMaker mat = new matrixMaker(a,b);
+		//print
+		steps.append("appendix matrix: \n");
+		printToBuilder(mat.matrix());
 		
 		forwardElimination(mat);
 		if(solutionExist)
@@ -19,11 +23,11 @@ public class GaussElimination {
 	
 	protected void forwardElimination(matrixMaker mat) {
 		//print
-		mat.print(mat.matrix());
+		steps.append("Forward elimination: \n");
 		
 		for(int k=0; k<mat.matrix().length-1; k++) {
 			//print
-			System.out.println("k: "+k);
+			steps.append("step: "+(k+1)+"\n");
 			for(int i=k+1; i<mat.matrix().length; i++) {
 				// factor handling
 				if(mat.matrix()[k][k] == 0) swap(mat, k);
@@ -31,12 +35,12 @@ public class GaussElimination {
 				double factor = mat.matrix()[i][k] / mat.matrix()[k][k];
 				if(factor == 0) continue;
 				//print
-				System.out.println("factor: "+factor);
+				steps.append("factor: "+factor+"\n");
 				for(int j=k; j<mat.matrix()[0].length; j++) {
 					mat.matrix()[i][j] = mat.matrix()[i][j] - factor*mat.matrix()[k][j];
 				}
 				//print
-				mat.print(mat.matrix());
+				printToBuilder(mat.matrix());
 			}
 		}
 		if(mat.matrix()[mat.matrix().length-1][mat.matrix().length-1] == 0) {
@@ -46,6 +50,9 @@ public class GaussElimination {
 	}
 	
 	protected double[] backSubstitution(matrixMaker mat) {
+		//print
+		steps.append("Solutions after back substitution :\n");
+		
 		int l = mat.matrix().length;
 		double[] x = new double[l];
 		
@@ -57,8 +64,7 @@ public class GaussElimination {
 			x[i] = (mat.matrix()[i][l] - sum) / mat.matrix()[i][i];
 		}
 		//print
-		System.out.println("solution: ");
-		mat.print(x);
+		printToBuilder(x);
 		return x;
 	}
 	
@@ -78,5 +84,26 @@ public class GaussElimination {
 			System.out.println("swap rows: "+i+", "+k);
 			mat.print(mat.matrix());
 		}
+	}
+	
+	protected void printToBuilder(double[][] m) {
+		for(int i=0; i<m.length; i++) {
+			for(int j=0; j<m[i].length-1; j++) {
+				steps.append(m[i][j]+",   ");
+			}
+			steps.append(m[i][m[i].length-1]);
+			steps.append("\n");
+		}
+	}
+	
+	protected void printToBuilder(double[] v) {
+		for(int i=0; i<v.length-1; i++) {
+			steps.append(v[i]+", ");
+		}
+		steps.append(v[v.length-1]+"\n");
+	}
+	
+	public String steps() {
+		return steps.toString();
 	}
 }
