@@ -51,6 +51,7 @@ public class NumericalGui {
 	private JTextArea outputTextArea;
 	private JTextArea initialTextArea;
 	private JTextArea parameterTextArea;
+	private JSpinner spinner;
 
 	/**
 	 * Launch the application.
@@ -280,11 +281,10 @@ public class NumericalGui {
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					default:
-						
+						throw new RuntimeErrorException(null, "Please Choose the Required Method");
 					}
 				
 				} catch (Exception e) {
-					//e.printStackTrace();//pop up 
 					JOptionPane.showConfirmDialog(null, e.getMessage());
 				}
 			}
@@ -364,7 +364,7 @@ public class NumericalGui {
 		outputTextArea.setEditable(false);
 		outputScrollPane.setViewportView(outputTextArea);
 
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(new Integer(4), new Integer(0), null, new Integer(1)));
 		spinner.setBounds(268, 13, 55, 20);
 		frame.getContentPane().add(spinner);
@@ -382,7 +382,6 @@ public class NumericalGui {
 
 		initialTextArea = new JTextArea();
 		initialTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
-		// textArea_3.setVisible(false);
 		initialScrollPane.setViewportView(initialTextArea);
 
 		parameterScrollPane = new JScrollPane();
@@ -392,7 +391,6 @@ public class NumericalGui {
 
 		parameterTextArea = new JTextArea();
 		parameterTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
-		// textArea_4.setVisible(false);
 		parameterScrollPane.setViewportView(parameterTextArea);
 	}
 }
