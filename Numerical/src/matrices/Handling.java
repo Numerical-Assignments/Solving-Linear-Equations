@@ -159,7 +159,7 @@ public class Handling {
     	String errorInitial;
     	String errorInput;
     	
-       int precision = 2;
+        int precision = 2;
     	int sizeOfArray = numOfLines(input);
   	    
     	double A[][] = new double [sizeOfArray][sizeOfArray];   
