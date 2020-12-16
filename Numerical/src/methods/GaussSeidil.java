@@ -62,19 +62,6 @@ public class GaussSeidil {
 	 public double[] gaussSeidilwitherror (double[][] mat , double[] bb, double error,double[] intial,int percision) {
 		 matrix.setMatrix(mat);
 		 n=matrix.matrix().length;
-		/* for(int i = 0 ; i < n ; i++) {
-			 for (int j = 0 ; j < n ; j++) {
-				 System.out.print(mat[i][j]+" ");
-			 }
-			 System.out.println();
-		 }
-		 for(int i = 0 ; i < n ; i++) {
-			 System.out.print(bb[i]+" "); 
-		 }
-		 System.out.println();
-		 for(int i = 0 ; i < n ; i++) {
-			 System.out.print(intial[i]+" "); 
-		 }*/
 		 b = bb;
 		 for(int i = 0 ; i < n ; i++) {
 			 for (int j = 0 ; j < n ; j++) {

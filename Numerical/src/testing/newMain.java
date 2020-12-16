@@ -33,7 +33,7 @@ public class newMain {
 		double[] b = new double[]{1,1.5,2};
 		
 		GaussElimination gaussSolver = new GaussElimination();
-		gaussSolver.solve(a.clone(), b.clone(),4);
+		gaussSolver.solve(a.clone(), b.clone(), 4);
 		System.out.print(gaussSolver.steps());
 		
 		System.out.println("\n\n");
