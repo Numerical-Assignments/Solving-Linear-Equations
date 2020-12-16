@@ -33,13 +33,13 @@ public class newMain {
 		double[] b = new double[]{1,1.5,2};
 		
 		GaussElimination gaussSolver = new GaussElimination();
-		gaussSolver.solve(a.clone(), b.clone());
+		gaussSolver.solve(a.clone(), b.clone(),4);
 		System.out.print(gaussSolver.steps());
 		
 		System.out.println("\n\n");
 		
 		GaussEliminationUsingPivoting geup = new GaussEliminationUsingPivoting();
-		geup.solve(a.clone(), b.clone());
+		geup.solve(a.clone(), b.clone(),4);
 		System.out.print(geup.steps());
 		
 	}
