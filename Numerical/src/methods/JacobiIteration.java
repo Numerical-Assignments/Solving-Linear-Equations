@@ -6,6 +6,7 @@ import matrices.HelpTools;
 import matrices.matrixMaker;
 
 public class JacobiIteration {
+	int max_itreation = 100;
 	 HelpTools help = new HelpTools();
 	 matrixMaker matrix = new matrixMaker();
 	 int n ;//= matrix.getMatrix().length;
@@ -113,7 +114,7 @@ public class JacobiIteration {
 		                continue; 
 		            boolean stop = true; 
 		            for (int i = 0; i < n && stop; i++) 
-		                if (Math.abs(X[i] - P[i]) > error) { 
+		            	if ((Math.abs(X[i] - P[i]) > error) && itreation < max_itreation) { 
 		                    stop = false; 
 		                    }
 		            if (stop) 

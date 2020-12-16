@@ -16,9 +16,9 @@ public class newMain {
 	public static void ashraf() {
 		JacobiIteration s = new JacobiIteration();
 		double intial[] = {0,0,0};
-		double bb[]= {5,7,7};
-		double mat [][] = {{3,1,1},{2,4,1},{1,1,5}};
-		s.jacobiwitherror(mat, bb, 0.0000001, intial, 4);
+		double bb[]= {5,7,5};
+		double mat [][] = {{3,1,1},{2,4,1},{1,1,3}};
+		s.jacobiwitherror(mat, bb, 1E-7, intial, 4);
 		System.out.print(s.steps);
 	}
 	public static void tarek() {
