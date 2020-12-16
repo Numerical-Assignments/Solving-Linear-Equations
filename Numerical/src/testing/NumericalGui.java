@@ -223,13 +223,13 @@ public class NumericalGui {
 					switch (method) {
 					case "Gauss Elimination.":
 						GaussElimination g = new GaussElimination();
-						solution= g.solve(A, B);
+						solution= g.solve(A, B,percision);
 						stepsTextArea.setText(g.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Gauss Elimination using pivoting.":
 						GaussEliminationUsingPivoting gp = new GaussEliminationUsingPivoting();
-						solution= gp.solve(A, B);
+						solution= gp.solve(A, B,percision);
 						stepsTextArea.setText(gp.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
