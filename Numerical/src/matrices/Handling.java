@@ -47,8 +47,8 @@ public class Handling {
 	}
 	
 	
-	public static String recievedInitialGuess (String input, int p, int n, double b[]) {
-   	 	StringBuilder observedErrors = new StringBuilder();
+	public static void recievedInitialGuess (String input, int p, int n, double b[]) {
+   	 	//StringBuilder observedErrors = new StringBuilder();
    	 	
 		String[] arrOfStr = input.split("[,]");
 		
@@ -63,15 +63,17 @@ public class Handling {
 	    			for(int j=0; i<b.length; i++) {
 	    				b[j] = 0;
 	    			}
-	    			observedErrors.append("Alert: WRONG INPUT!");
-	    			return observedErrors.toString();
+	                throw new NumberFormatException("Alert: WRONG INPUT!"); 
+	    			//observedErrors.append("Alert: WRONG INPUT!");
+	    			//return observedErrors.toString();
 	    		}
 			}
-			return observedErrors.toString();
+			//return observedErrors.toString();
 		}
 		else {
-			observedErrors.append("Alert: Initial Guess Matrix is of DIFFERENT SIZE! Or Wrong Initial Guess");
-			return observedErrors.toString();
+			throw new NumberFormatException("Alert: Initial Guess Matrix is of DIFFERENT SIZE! Or Wrong Initial Guess");
+			//observedErrors.append("Alert: Initial Guess Matrix is of DIFFERENT SIZE! Or Wrong Initial Guess");
+			//return observedErrors.toString();
 		}
 		
 		
@@ -96,9 +98,9 @@ public class Handling {
     	return aList;
 	}
 	
-	public static String handeledMatrix (String input, ArrayList<Double> list, int n, double[][] mat, double b[]) {
+	public static void handeledMatrix (String input, ArrayList<Double> list, int n, double[][] mat, double b[]) {
 		
-		StringBuilder observedErrors = new StringBuilder();
+		//StringBuilder observedErrors = new StringBuilder();
 		double indexOfMatrixB = n;
 		double x = indexOfMatrixB + 1;
 		int j=0;
@@ -108,14 +110,16 @@ public class Handling {
 	if (simpleCheck(input)) {
 		
 		if (list.isEmpty()) {
-			observedErrors.append("Alert: WRONG INPUT!");
-			return observedErrors.toString();
+            throw new NumberFormatException("Alert: WRONG INPUT!"); 
+			//observedErrors.append("Alert: WRONG INPUT!");
+			//return observedErrors.toString();
 		}
 		
 		else if (list.size() != (n*n + n)) {
 			list.clear();
-			observedErrors.append("Alert: WRONG INPUT!");
-			return observedErrors.toString();
+            throw new NumberFormatException("Alert: WRONG INPUT!"); 
+			//observedErrors.append("Alert: WRONG INPUT!");
+			//return observedErrors.toString();
 
 		}
 		else {	
@@ -144,21 +148,21 @@ public class Handling {
 				}
 			}
 		}
-		return observedErrors.toString();
+		//return observedErrors.toString();
 	}
 	else {
-		observedErrors.append("Alert: WRONG INPUT!");
-		return observedErrors.toString();
+        throw new NumberFormatException("Alert: WRONG INPUT!"); 
+		//observedErrors.append("Alert: WRONG INPUT!");
+		//return observedErrors.toString();
 
 	}
 }
 
     public static void main(String[] args) {
 
-        String input = "5,91,,4\n1,-3,8,4\n1,2,3,9";
+    	/*String input = "5,91,,4\n1,-3,8,4\n1,2,3,9";
         String initial = "5,4=6";
-    	String errorInitial;
-    	String errorInput;
+
     	
         int precision = 2;
     	int sizeOfArray = numOfLines(input);
@@ -167,8 +171,8 @@ public class Handling {
         double B[] = new double [sizeOfArray];
         double I[] = new double [sizeOfArray];
         	
-        errorInput = handeledMatrix(input, recievedText (input, precision) ,sizeOfArray , A, B);
-        errorInitial = recievedInitialGuess (initial, precision, sizeOfArray, I);
+        handeledMatrix(input, recievedText (input, precision) ,sizeOfArray , A, B);
+        recievedInitialGuess (initial, precision, sizeOfArray, I);
             
         for (int i = 0; i < sizeOfArray; i++) {
         	for (int j = 0; j < sizeOfArray; j++) {
@@ -185,13 +189,7 @@ public class Handling {
 
     	for (double element: I) {
     		System.out.println(element);
-    	}
-    	    
-        System.out.print("\n");
-        System.out.print(errorInput);
-        System.out.print("\n");
-        System.out.print(errorInitial);
-
+    	}*/
     }
 
 }

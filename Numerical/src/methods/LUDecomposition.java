@@ -358,19 +358,19 @@ public class LUDecomposition {
 // Testing of both forms 
 	
 public static void main(String[] args) {
-        int n = 3;
+    int n = 3;
 	int precision = 4;
 	
 	double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
-        double b[] = {6, 7, 15};
+    double b[] = {6, 7, 15};
 
 	
 	System.out.println(LUDoolittle(mat, b, n, precision)[0]);
-        System.out.println(LUDoolittle(mat, b, n, precision)[1]);
-        System.out.println(LUCrout(mat,b, n, precision)[0]);
-        System.out.println(LUCrout(mat,b, n, precision)[1]);
-        System.out.println(LUCholesky(mat, b, n, precision)[0]);
-        System.out.println(LUCholesky(mat, b, n, precision)[1]);
+    System.out.println(LUDoolittle(mat, b, n, precision)[1]);
+    System.out.println(LUCrout(mat,b, n, precision)[0]);
+    System.out.println(LUCrout(mat,b, n, precision)[1]);
+    System.out.println(LUCholesky(mat, b, n, precision)[0]);
+    System.out.println(LUCholesky(mat, b, n, precision)[1]);
 
     }
   

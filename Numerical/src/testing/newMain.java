@@ -1,12 +1,10 @@
 package testing;
 
 import methods.*;
-import matrices.*;
 
 public class newMain {
 
 	public static void main(String[] args) {
-		//youssef();
 		ashraf();
 	}
 	
@@ -22,7 +20,19 @@ public class newMain {
 		System.out.print(s.steps);
 	}
 	public static void tarek() {
+		int n = 3;
+		int precision = 4;
 		
+		double mat[][] = { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } };
+	    double b[] = {6, 7, 15};
+
+		
+		System.out.println(LUDecomposition.LUDoolittle(mat, b, n, precision)[0]);
+	    System.out.println(LUDecomposition.LUDoolittle(mat, b, n, precision)[1]);
+	    System.out.println(LUDecomposition.LUCrout(mat,b, n, precision)[0]);
+	    System.out.println(LUDecomposition.LUCrout(mat,b, n, precision)[1]);
+	    System.out.println(LUDecomposition.LUCholesky(mat, b, n, precision)[0]);
+	    System.out.println(LUDecomposition.LUCholesky(mat, b, n, precision)[1]);
 	}
 	public static void youssef() {
 		double[][] a = new double[][] {
