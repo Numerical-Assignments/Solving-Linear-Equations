@@ -312,7 +312,7 @@ public class NumericalGui {
 		frame.getContentPane().add(equationScrollPane);
 
 		equationTextArea = new JTextArea();
-		equationTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		equationTextArea.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
 		equationScrollPane.setViewportView(equationTextArea);
 
 		JScrollPane stepsScrollPane = new JScrollPane();
@@ -320,7 +320,7 @@ public class NumericalGui {
 		frame.getContentPane().add(stepsScrollPane);
 
 		stepsTextArea = new JTextArea();
-		stepsTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		stepsTextArea.setFont(new Font("Palatino Linotype", Font.PLAIN, 16));
 		stepsTextArea.setEditable(false);
 		stepsScrollPane.setViewportView(stepsTextArea);
 
