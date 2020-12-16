@@ -259,7 +259,7 @@ public class NumericalGui {
 						break;
 					case "Gauss Seidil." :
 						GaussSeidil gs = new GaussSeidil();
-						double [] initial = null;
+						double [] initial = new double[sizeOfArray];
 						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial);
 						switch (parameter) {
 						case "Number of iterations": 
@@ -275,15 +275,15 @@ public class NumericalGui {
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Jacobi Iteration":
-						initial = null;
-						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial);
+						double [] initial1 = new double[sizeOfArray];
+						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial1);
 						JacobiIteration j = new JacobiIteration();
 						switch (parameter) {
 						case "Number of iterations": 
-							solution = j.jacobiwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()), initial, percision);
+							solution = j.jacobiwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()), initial1, percision);
 							break;
 						case "Absolute Relative Error":
-							solution = j.jacobiwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial, percision);
+							solution = j.jacobiwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial1, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
