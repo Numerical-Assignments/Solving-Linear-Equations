@@ -86,14 +86,17 @@ public class LUDecomposition {
 	        double ff[] = forward (lower, b, p);
 		    double bb[]= backward (upper, ff, p);
 	        
-		    output.append("Solution" + "\n");
+		    //output.append("Solution" + "\n");
 		    //System.out.println("Solution");	 
 		       
-		    for (double element: bb) {
+		    for(int i=0; i<bb.length;i++) {
+		    	output.append("x" + i + "=" + bb[i] + "\t");
+		    }
+		   /* for (double element: bb) {
 			    output.append(element + "\n");
 		    	//System.out.println(element);
 		    }
-	        steps.append("\n");
+	        steps.append("\n");*/
 		    //System.out.println();
 	        Solution[0] = steps.toString();
 	        Solution[1] = output.toString();
@@ -174,14 +177,18 @@ public class LUDecomposition {
         }        
         double ff[] = forward (lower, b, p);
 	    double bb[]= backward (upper, ff, p);
-	    output.append("Solution" + "\n");
+	    //output.append("Solution" + "\n");
 	    //System.out.println("Solution");	 
 	       
-	    for (double element: bb) {
+	    /*for (double element: bb) {
 		    output.append(element + "\n");
 	    	//System.out.println(element);
 	    }
-        output.append("\n");
+        output.append("\n");*/
+        
+	    for( i=0; i<bb.length;i++) {
+	    	output.append("x" + i + "= " + bb[i] + "\t");
+	    }
 	    //System.out.println();
         Solution[0] = steps.toString();
         Solution[1] = output.toString();
@@ -261,14 +268,17 @@ public class LUDecomposition {
             
             double ff[] = forward (lower, b, p);
     	    double bb[]= backward (lowerTranspose, ff, p);
-		    output.append("Solution" + "\n");
+		    //output.append("Solution" + "\n");
 		    //System.out.println("Solution");	 
 		       
-		    for (double element: bb) {
+		    for(int i=0; i<bb.length;i++) {
+		    	output.append("x" + i + "=" + bb[i] + "\t");
+		    }
+		    /*for (double element: bb) {
 			    output.append(element + "\n");
 		    	//System.out.println(element);
 		    }
-	        output.append("\n");
+	        output.append("\n");*/
 		    //System.out.println();
 	        Solution[0] = steps.toString();
 	        Solution[1] = output.toString();
