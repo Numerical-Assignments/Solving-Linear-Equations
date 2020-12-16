@@ -17,7 +17,7 @@ public class GaussElimination {
 		
 		forwardElimination(mat);
 		if(solutionExist)
-			backSubstitution(mat);
+			return backSubstitution(mat);
 		
 		return null;
 	}
