@@ -35,11 +35,13 @@ import methods.LUDecomposition;
 public class NumericalGui {
 
 	private HelpTools help = new HelpTools();
-	
-	
+
 	private String method = "Choose method";
-	private String parameter= "Choose parameter";
-	
+	private String parameter = "Choose parameter";
+	private String inputSteps = "Enter your Equations As Augmented Matrix on the form :\ndigit,digit,........,digit\n\n"
+			+ "example :\n==========\nequation1=> aX+bY=c\nequation2=> dX+eY=f \n\non the form:\n==============="
+			+ "\na,b,c\nd,e,f\n======================================================================\n";
+
 	private JFrame frame;
 	private JScrollPane equationScrollPane;
 	private JLabel lblParameter;
@@ -103,21 +105,15 @@ public class NumericalGui {
 			public void actionPerformed(ActionEvent arg0) {
 				method = MethodsComboBox.getSelectedItem().toString();
 				switch (method) {
-				/*case "Gauss Elimination.":
-					equationScrollPane.setBounds(10, 87, 452, 250);
-					ParametersComboBox.setVisible(false);
-					lblParameters.setVisible(false);
-					break;
-				case "Gauss Elimination using pivoting.":
-					equationScrollPane.setBounds(10, 87, 452, 250);
-					ParametersComboBox.setVisible(false);
-					lblParameters.setVisible(false);
-					break;
-				case "Gauss Jordan.":
-					equationScrollPane.setBounds(10, 87, 452, 250);
-					ParametersComboBox.setVisible(false);
-					lblParameters.setVisible(false);
-					break;*/
+				/*
+				 * case "Gauss Elimination.": equationScrollPane.setBounds(10, 87, 452, 250);
+				 * ParametersComboBox.setVisible(false); lblParameters.setVisible(false); break;
+				 * case "Gauss Elimination using pivoting.": equationScrollPane.setBounds(10,
+				 * 87, 452, 250); ParametersComboBox.setVisible(false);
+				 * lblParameters.setVisible(false); break; case "Gauss Jordan.":
+				 * equationScrollPane.setBounds(10, 87, 452, 250);
+				 * ParametersComboBox.setVisible(false); lblParameters.setVisible(false); break;
+				 */
 				case "LU Decomposition.":
 					equationScrollPane.setBounds(10, 87, 452, 250);
 					ParametersComboBox.setModel(new DefaultComboBoxModel(
@@ -126,7 +122,7 @@ public class NumericalGui {
 					lblParameters.setVisible(true);
 					ParametersComboBox.setVisible(true);
 					break;
-				case "Gauss Seidil." :
+				case "Gauss Seidil.":
 					equationScrollPane.setBounds(10, 87, 452, 160);
 					lblInitialGuess.setVisible(true);
 					initialScrollPane.setVisible(true);
@@ -160,11 +156,12 @@ public class NumericalGui {
 		ParametersComboBox = new JComboBox();
 		ParametersComboBox.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
 		ParametersComboBox.setBounds(132, 396, 191, 20);
-		//ParametersComboBox.setModel(new DefaultComboBoxModel(new String[] { "Choose Paremeter?" }));
+		// ParametersComboBox.setModel(new DefaultComboBoxModel(new String[] { "Choose
+		// Paremeter?" }));
 		ParametersComboBox.setVisible(false);
 		frame.getContentPane().add(ParametersComboBox);
 		ParametersComboBox.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parameter = ParametersComboBox.getSelectedItem().toString();
@@ -183,7 +180,7 @@ public class NumericalGui {
 					parameterScrollPane.setVisible(false);
 					lblParameter.setVisible(false);
 				}
-				
+
 			}
 		});
 
@@ -192,9 +189,9 @@ public class NumericalGui {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser(new File("c:\\temp"));
 				fc.setDialogTitle("Load a file");
-				fc.setFileFilter(new FileNameExtensionFilter("TextFile","txt"));
-				int returnValue =fc.showOpenDialog(null);
-				if (returnValue==JFileChooser.APPROVE_OPTION) {
+				fc.setFileFilter(new FileNameExtensionFilter("TextFile", "txt"));
+				int returnValue = fc.showOpenDialog(null);
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fc.getSelectedFile();
 					try {
 						equationTextArea.setText(help.readFromFile(selectedFile.getAbsolutePath()));
@@ -215,27 +212,27 @@ public class NumericalGui {
 					double[] solution;
 					String equation = equationTextArea.getText();
 					int sizeOfArray = Handling.numOfLines(equation);
-					double A[][] = new double [sizeOfArray][sizeOfArray];   
-			        double B[] = new double [sizeOfArray];		        
+					double A[][] = new double[sizeOfArray][sizeOfArray];
+					double B[] = new double[sizeOfArray];
 					int percision = (int) spinner.getValue();
-					Handling.handeledMatrix(equation, Handling.recievedText (equation, percision),sizeOfArray, A, B);
-					//errorInitial = recievedInitialGuess (initial, precision, sizeOfArray, I);
+					Handling.handeledMatrix(equation, Handling.recievedText(equation, percision), sizeOfArray, A, B);
+					// errorInitial = recievedInitialGuess (initial, precision, sizeOfArray, I);
 					switch (method) {
 					case "Gauss Elimination.":
 						GaussElimination g = new GaussElimination();
-						solution= g.solve(A, B,percision);
+						solution = g.solve(A, B, percision);
 						stepsTextArea.setText(g.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Gauss Elimination using pivoting.":
 						GaussEliminationUsingPivoting gp = new GaussEliminationUsingPivoting();
-						solution= gp.solve(A, B,percision);
+						solution = gp.solve(A, B, percision);
 						stepsTextArea.setText(gp.steps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Gauss Jordan.":
 						GaussJordan gj = new GaussJordan();
-						solution= gj.solve(A, B,percision);
+						solution = gj.solve(A, B, percision);
 						stepsTextArea.setText(gj.getSteps());
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
@@ -243,13 +240,13 @@ public class NumericalGui {
 						String[] S = null;
 						switch (parameter) {
 						case "Downlittle Form":
-							S=LUDecomposition.LUDoolittle(A, B,sizeOfArray,percision);
+							S = LUDecomposition.LUDoolittle(A, B, sizeOfArray, percision);
 							break;
 						case "Crout Form":
-							S=LUDecomposition.LUCrout(A, B,sizeOfArray,percision);
+							S = LUDecomposition.LUCrout(A, B, sizeOfArray, percision);
 							break;
 						case "Cholesky Form":
-							S=LUDecomposition.LUCholesky(A, B,sizeOfArray,percision);
+							S = LUDecomposition.LUCholesky(A, B, sizeOfArray, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required Form");
@@ -257,16 +254,18 @@ public class NumericalGui {
 						stepsTextArea.setText(S[0]);
 						outputTextArea.setText(S[1]);
 						break;
-					case "Gauss Seidil." :
+					case "Gauss Seidil.":
 						GaussSeidil gs = new GaussSeidil();
-						double [] initial = new double[sizeOfArray];
-						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial);
+						double[] initial = new double[sizeOfArray];
+						Handling.recievedInitialGuess(initialTextArea.getText(), percision, sizeOfArray, initial);
 						switch (parameter) {
-						case "Number of iterations": 
-							solution = gs.gaussSeidilwithItrations(A,B, Integer.parseInt(parameterTextArea.getText()), initial, percision);
+						case "Number of iterations":
+							solution = gs.gaussSeidilwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()),
+									initial, percision);
 							break;
 						case "Absolute Relative Error":
-							solution=gs.gaussSeidilwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial, percision);
+							solution = gs.gaussSeidilwitherror(A, B, Double.parseDouble(parameterTextArea.getText()),
+									initial, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
@@ -275,15 +274,17 @@ public class NumericalGui {
 						outputTextArea.setText(help.SolutionToString(solution));
 						break;
 					case "Jacobi Iteration":
-						double [] initial1 = new double[sizeOfArray];
-						Handling.recievedInitialGuess (initialTextArea.getText(), percision, sizeOfArray, initial1);
+						double[] initial1 = new double[sizeOfArray];
+						Handling.recievedInitialGuess(initialTextArea.getText(), percision, sizeOfArray, initial1);
 						JacobiIteration j = new JacobiIteration();
 						switch (parameter) {
-						case "Number of iterations": 
-							solution = j.jacobiwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()), initial1, percision);
+						case "Number of iterations":
+							solution = j.jacobiwithItrations(A, B, Integer.parseInt(parameterTextArea.getText()),
+									initial1, percision);
 							break;
 						case "Absolute Relative Error":
-							solution = j.jacobiwitherror(A, B, Double.parseDouble(parameterTextArea.getText()), initial1, percision);
+							solution = j.jacobiwitherror(A, B, Double.parseDouble(parameterTextArea.getText()),
+									initial1, percision);
 							break;
 						default:
 							throw new RuntimeErrorException(null, "Please Choose the Required parameter");
@@ -294,11 +295,11 @@ public class NumericalGui {
 					default:
 						throw new RuntimeErrorException(null, "Please Choose the Required Method");
 					}
-				
+
 				} catch (Exception e) {
-					//JOptionPane.showConfirmDialog(null, e.getMessage());
+					// JOptionPane.showConfirmDialog(null, e.getMessage());
 					JOptionPane.showMessageDialog(null, e.getMessage());
-					stepsTextArea.setText("");
+					stepsTextArea.setText(inputSteps);
 					outputTextArea.setText("");
 				}
 			}
@@ -321,6 +322,7 @@ public class NumericalGui {
 
 		stepsTextArea = new JTextArea();
 		stepsTextArea.setFont(new Font("Palatino Linotype", Font.PLAIN, 16));
+		stepsTextArea.setText(inputSteps);
 		stepsTextArea.setEditable(false);
 		stepsScrollPane.setViewportView(stepsTextArea);
 
