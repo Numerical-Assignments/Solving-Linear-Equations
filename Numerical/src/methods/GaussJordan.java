@@ -57,7 +57,7 @@ public class GaussJordan {
 		}
 		if (i==matrix.matrix().length) {
 			//System.out.println("Cannot Swap");
-			throw new ArithmeticException("Cannot Swap Rows");
+			throw new ArithmeticException("Cannot Swap Rows (No Solution)");
 		}
 	}
 
