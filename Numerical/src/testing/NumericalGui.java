@@ -37,8 +37,8 @@ public class NumericalGui {
 	private HelpTools help = new HelpTools();
 	
 	
-	private String method;
-	private String parameter;
+	private String method = "Choose method";
+	private String parameter= "Choose parameter";
 	
 	private JFrame frame;
 	private JScrollPane equationScrollPane;
@@ -85,7 +85,7 @@ public class NumericalGui {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 900, 600);
+		frame.setBounds(100, 100, 1100, 600);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -316,7 +316,7 @@ public class NumericalGui {
 		equationScrollPane.setViewportView(equationTextArea);
 
 		JScrollPane stepsScrollPane = new JScrollPane();
-		stepsScrollPane.setBounds(472, 87, 402, 329);
+		stepsScrollPane.setBounds(472, 87, 602, 329);
 		frame.getContentPane().add(stepsScrollPane);
 
 		stepsTextArea = new JTextArea();
@@ -370,7 +370,7 @@ public class NumericalGui {
 		frame.getContentPane().add(lblOutput);
 
 		JScrollPane outputScrollPane = new JScrollPane();
-		outputScrollPane.setBounds(10, 463, 864, 73);
+		outputScrollPane.setBounds(10, 463, 1064, 73);
 		frame.getContentPane().add(outputScrollPane);
 
 		outputTextArea = new JTextArea();
