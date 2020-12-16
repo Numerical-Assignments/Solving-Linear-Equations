@@ -6,15 +6,20 @@ import matrices.*;
 public class newMain {
 
 	public static void main(String[] args) {
-		youssef();
-
+		//youssef();
+		ashraf();
 	}
 	
 	public static void abdallah() {
 		
 	}
 	public static void ashraf() {
-		
+		JacobiIteration s = new JacobiIteration();
+		double intial[] = {0,0,0};
+		double bb[]= {5,7,7};
+		double mat [][] = {{3,1,1},{2,4,1},{1,1,5}};
+		s.jacobiwitherror(mat, bb, 0.0000001, intial, 4);
+		System.out.print(s.steps);
 	}
 	public static void tarek() {
 		
@@ -34,7 +39,7 @@ public class newMain {
 		System.out.println("\n\n");
 		
 		GaussEliminationUsingPivoting geup = new GaussEliminationUsingPivoting();
-		geup.solve(a.clone(), b.clone(), 4);
+		geup.solve(a.clone(), b.clone(),4);
 		System.out.print(geup.steps());
 		
 	}
