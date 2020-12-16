@@ -19,11 +19,14 @@ public class GaussEliminationUsingPivoting extends GaussElimination {
 				if(mat.matrix()[k][k] == 0) swap(mat, k);
 				if(!solutionExist) return;
 				double factor = mat.matrix()[i][k] / mat.matrix()[k][k];
+				factor = tool.setpercision(factor, per);
 				if(factor == 0) continue;
 				//print
 				steps.append("factor: "+factor+"\n");
-				for(int j=k; j<mat.matrix()[0].length; j++) {
+				mat.matrix()[i][k] = 0;
+				for(int j=k+1; j<mat.matrix()[0].length; j++) {
 					mat.matrix()[i][j] = mat.matrix()[i][j] - factor*mat.matrix()[k][j];
+					mat.matrix()[i][j] = tool.setpercision(mat.matrix()[i][j], per);
 				}
 				//print
 				tool.AppendMatrixToString(steps ,mat.matrix());
