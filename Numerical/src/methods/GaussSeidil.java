@@ -93,7 +93,7 @@ public class GaussSeidil {
 		     int itreation = 0;
 		    while(true) {
 		            for (int i = 0; i < n; i++) { 
-		                double sum = b[i]; // b_n 
+		                double sum = b[i]; 
 		                for (int j = 0; j < n; j++) {
 		                    if (j != i) 
 		                        sum -= M[i][j] * X[j];

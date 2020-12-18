@@ -90,6 +90,7 @@ public class JacobiIteration {
 			 double[] X = new double[n]; // Approximations 
 		     double[] P = new double[n]; // Prev 
 		     X = intial;
+		     //P = intial;
 		     int itreation = 0;
 		    while(true) {
 		            for (int i = 0; i < n; i++) { 
@@ -166,6 +167,7 @@ public class JacobiIteration {
 			 double[] X = new double[n]; // Approximations 
 			 double[] P = new double[n]; // Prev
 		     X = intial;
+		     P = intial;
 		    for(int itreation = 0 ;itreation < itreations ; itreation++){ 
 		            for (int i = 0; i < n; i++) { 
 		                double sum = b[i]; // b_n 
