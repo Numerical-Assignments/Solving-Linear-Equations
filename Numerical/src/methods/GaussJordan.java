@@ -17,7 +17,6 @@ public class GaussJordan {
 	}
 	
 	private double[] JordanElemenation(matrixMaker matrix,int percision) {
-		double[] solution = new double[matrix.matrix().length];
 		for (int k=0;k<matrix.matrix().length;k++) {
 			if (matrix.matrix()[k][k]==0)swap(matrix,k);
 			for (int i = 0;i<matrix.matrix().length;i++) {
@@ -35,13 +34,14 @@ public class GaussJordan {
 				}
 			}
 		}
+		double[] solution = new double[matrix.matrix().length];
 		for (int i=0;i<matrix.matrix().length;i++) {
 			solution[i]=matrix.matrix()[i][matrix.matrix()[0].length-1]/matrix.matrix()[i][i];
 			solution[i]=help.setpercision(solution[i], percision);
 		}
 		steps.append("\nGauss Jordan method Solution => ");
 		steps=help.AppendVectorToString(steps, solution);
-		System.out.println(steps);
+		//System.out.println(steps);
 		return solution;
 	}
 	
