@@ -1,2 +1,2 @@
-# Assignment1
+# Numerical Assignment1
 Solving Linear Equations
